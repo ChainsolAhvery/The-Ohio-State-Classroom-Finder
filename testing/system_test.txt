@@ -1,0 +1,140 @@
+# Created 2/17/2020 by Emily Niehaus
+# Edited 2/17/2020 by Tze Hei Tam - Completed tests 2-3b
+# Edited 2/18/2020 by Alli Hornyak - Completed tests for filtering features
+# Edited 2/19/2020 by Emily Niehaus - Completed tests for getting file + writing to it
+
+Integration and Functionality Testing Implementation
+
+======================================================================
+Runtime expectations:
+    PASS Program runs?
+    PASS Indicates when data is being scraped?
+    PASS Successfully scrapes data?
+    PASS Indicates when data is done scraping?
+    PASS Shows welcome message?
+    PASS Lists 3 default commands? (1: list buildings, 2: enter buildings, 3: quit)
+        Input expectations:
+            PASS Accepts 1?
+            PASS Accepts 2?
+            PASS Accepts 3?
+            PASS All other input defaults to “1”?
+        Conditional expectations:
+            [ see “Command 1 (List Buildings) Expectations” ]
+            [ see “Command 2 (Enter Buildings) Expectations” ]
+            [ see “Command 3 (Quit) Expectations” ]
+
+======================================================================
+
+Command 1 (List Buildings) Expectations:
+    PASS Output a list of building names?
+    PASS Building names match buildings listed on website?
+        This was verified by visually/manually comparing the output list of buildings to the list of buildings on the website.
+    PASS Building names alphabetized?
+    PASS All names unique (no duplicates)?
+        This was verified visually/manually by looking at the output list of buildings.
+    PASS List 3 default commands? (1: list buildings, 2: enter buildings, 3: quit)
+        Input expectations:
+            PASS Accepts 1?
+            PASS Accepts 2?
+            PASS Accepts 3?
+            PASS All other input defaults to “1”?
+        Conditional expectations:
+            [ see “Command 1 (List Buildings) Expectations” ]
+            [ see “Command 2 (Enter Buildings) Expectations” ]
+            [ see “Command 3 (Quit) Expectations” ]
+
+======================================================================
+
+Command 2 (Enter Buildings) Expectations:
+    PASS Prompt for building names separated with commas?
+        Input Expectations:
+            PASS Accept a list of one building?
+            PASS Accept a list of two buildings?
+            PASS Accept a list of three buildings?
+            PASS Reject building names spelled correctly, but improper case?
+            PASS Reject a list of greater than 3 buildings?
+            PASS Reject a list of zero buildings?
+            PASS Reject misspelled building names?
+            PASS Reject buildings that aren’t in list (any string that’s not in the list)?
+            PASS Reject “ , , ”?
+            PASS Reject “building, , building”?
+    PASS Prompt for room feature filtering?
+    PASS Lists 2 options (1: yes, 2: no)?
+        Input Expectations:
+            PASS Accepts 1?
+            PASS Accepts 2?
+            PASS All other input defaults to “1”?
+        Conditional Expectations:
+            ===================================
+            Command 1 (Yes) Expectations:
+                PASS Display multi-select with list of room features?
+                    Multi-select list includes all corresponding room features from the website when selected buildings are....
+                        PASS Watts Hall
+                        PASS Independence Hall, Gateway Film Center
+                        PASS Independence Hall, Gateway Film Center, CBEC
+                    Input Expectation:
+                        PASS Accept 0 items - displayed no features
+                        PASS Accept all items? - displayed all elements
+                        PASS Accept a variable number of items (between 0-n)?
+            ===================================
+            Command 2 (No) Expectations:
+                PASS continues to next step
+                PASS Prompt to choose between “output all rooms” and “advanced search”?
+                PASS Lists two options (1: output all rooms, 2: advanced search)
+                    Input Expectations:
+                        PASS Accepts 1?
+                        PASS Accepts 2?
+                        PASS All other input defaults to “1”?
+                    Conditional Expectations:
+                        ===================================
+                        Command 1 (Output All Rooms) Expectations:
+                            PASS continues to writing to file, then displaying default commands 
+                        ===================================
+                        Command 2 (Advanced Search) Expectations:
+                            PASS Display multi-select with list of room features
+                                Multi-select list includes (A ∩ B) where (A = {room features listed on website} and B = {room features that have been previously chosen}) when selected buildings are....
+                                    PASS Watts Hall
+                                    PASS Independence Hall, CBEC
+                                    PASS Independence Hall, Gateway Film Center, CBEC
+                                Input Expectation:
+                                    PASS Accept 0 items displays the room
+                                    PASS Accept all items - if no rooms, displays There are no rooms with your selected features
+                                    PASS Accept a variable number of items (between 0-n) - if no rooms, displays There are no rooms with your selected features
+                            PASS Prompt for an output file
+                                Accepts properly formatted .txt file names?
+                                    PASS Accept “text.txt”?
+                                    PASS Accept “words_words-words.txt”
+                                    PASS Accept “this space.txt”
+                                Rejects improperly formatted file names?
+                                    PASS Reject “text”
+                                    PASS Reject “$ymb@!.txt”
+                            PASS File with given name is created?
+                            Data is correctly written to file when….
+                                Buildings: Gateway Film Center, Independence Hall
+                                Chosen features: Vertical Sliding Chalkboards, Projector, Carpeted
+                                Advanced Search on:  select none
+                                    PASS Output file as expected?
+                                Buildings: CBEC, Independence Hall, Pomerene Hall 
+                                Chosen features: Digital Display, Blu-ray, Windows, Window curtains
+                                Advanced Search on:  Windows
+                                    PASS Output file as expected?
+                                Buildings: Sullivant Hall
+                                Chosen features:  Elevated Stage, Chalkboards, Projector
+                                Advanced Search on:  Enhanced Podium
+                                    PASS Output file as expected?
+                                ===================================
+    PASS List 3 default commands? (1: list buildings, 2: enter buildings, 3: quit)
+        Input expectations:
+            PASS Accepts 1?
+            PASS Accepts 2?
+            PASS Accepts 3?
+            PASS All other input defaults to “1”?
+        Conditional expectations:
+            [ see “Command 1 (List Buildings) Expectations” ]
+            [ see “Command 2 (Enter Buildings) Expectations” ]
+            [ see “Command 3 (Quit) Expectations” ]
+
+======================================================================
+
+Command 3 (Quit) Expectations:
+PASS Program closes?
